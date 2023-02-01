@@ -1,8 +1,10 @@
 import Card from '@/component/Card';
-import React, { useEffect } from 'react';
+import DtailsModal from '@/component/DtailsModal';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const product = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const {allProduct} = useSelector(s => s)
     const dispatch = useDispatch();
 
@@ -17,9 +19,9 @@ const product = () => {
     return (
         <div className='p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16'>
         {
-            allProduct?.map(d => <Card key={d._id} d={d} />)
+            allProduct?.map(d => <Card key={d._id} d={d} setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />)
         }
-
+        <DtailsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
     </div>
     );
 };
