@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react'
+import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 const login = () => {
     const [error, setError] = useState("")
@@ -29,8 +30,8 @@ const login = () => {
             if(data?.token?.length > 40 ){
                 const restToken = data.token.split(" ")[1]
                 localStorage.setItem("token", restToken);
-                dispatch({type: "token", payload: restToken})
-                // console.log("Registe success")
+                dispatch({type: "token", payload: restToken});
+                toast.success("Login Successfull");
             }
             if(data?.message?.length > 5){
                 setError(data.message)
