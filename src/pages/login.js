@@ -1,17 +1,41 @@
 import Link from 'next/link';
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 const login = () => {
-
+    const [error, setError] = useState("")
     const state = useSelector(s => s);
+
+    const dispatch = useDispatch();
     console.log(state)
 
+    //Login FN
     const handleLogIn = (e) => {
         e.preventDefault();
+        setError("")
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        const user = {email, password}
+        // Login user From Backend
+        fetch('https://staging-be-ecom.techserve4u.com/api/user/signin',{
+            method: "POST",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data?.token?.length > 40 ){
+                const restToken = data.token.split(" ")[1]
+                localStorage.setItem("token", restToken);
+                dispatch({type: "token", payload: restToken})
+                // console.log("Registe success")
+            }
+            if(data?.message?.length > 5){
+                setError(data.message)
+            }
+        })
     }
 
     return (
@@ -41,7 +65,7 @@ const login = () => {
                                         <Link href="/" className="label-text-alt link link-hover block text-right  font-medium text-[16px] pt-2 opacity-80">Forgot password?</Link>
                                     </label>
                                 </div>
-                                {/* <p className='text-sm text-red-500 py-2'>{error}</p> */}
+                                <p className='text-sm text-red-500 py-2'>{error}</p>
                                 <div className="form-control mt-3">
                                     <button className="text-white w-full p-4 border-none rounded-full bg-gradient-to-bl from-indigo-500 to-teal-800 text-lg font-semibold">Login</button>
                                 </div>

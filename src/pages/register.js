@@ -19,8 +19,8 @@ const register = () => {
         })
         .then(res => res.json())
         .then(data => {
-            if(isOtpSend){
-                console.log("sucess")
+            if(data.isOtpSend){
+                console.log("Registe success")
             }
             console.log(data)
         })

@@ -1,4 +1,14 @@
-const initState = {name: "Hasan"}
+const initState = {
+    name: "Hasan",
+    userToken:""
+}
 export const  registerReducer = (state = initState, action) =>{
-    return state;
+    switch(action.type){
+        case "token":
+            return {
+                ...state, userToken: action.payload
+            }
+        default:
+            return state
+    }
 }
