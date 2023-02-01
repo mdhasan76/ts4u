@@ -3,7 +3,7 @@ import DtailsModal from '@/component/DtailsModal';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const product = () => {
+const Product = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {allProduct} = useSelector(s => s)
     const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const product = () => {
         .then(data => dispatch({type: "allData", payload: data.products}))
     }, [])
 
-    console.log(allProduct)
     return (
         <div className='p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16'>
         {
@@ -26,4 +25,4 @@ const product = () => {
     );
 };
 
-export default product;
+export default Product;

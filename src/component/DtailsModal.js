@@ -11,7 +11,7 @@ const DtailsModal= ({isModalOpen, setIsModalOpen}) => {
   return (
     <>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={() => setIsModalOpen(false)}>
-        <p>Some contents...</p>
+        <p className='text-2xl font-medium p-5'>Product Details here</p>
       </Modal>
     </>
   );
