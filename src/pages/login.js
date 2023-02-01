@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import React from 'react'
+import { useSelector } from 'react-redux';
 const login = () => {
+
+    const state = useSelector(s => s);
+    console.log(state)
 
     const handleLogIn = () => {
         console.log('clicked')
