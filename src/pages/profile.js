@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const {isVerified} = useSelector(s => s);
+    const {isVerified,user} = useSelector(s => s);
 
     //send otp for verify
     const sendOTP = () => {
@@ -15,7 +15,7 @@ const profile = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: "mdhasan8064@gmail.com" })
+            body: JSON.stringify({ email: user.email })
 
         })
             .then(res => res.json())
@@ -51,9 +51,12 @@ const profile = () => {
                     </div>
                 </div>
                 <div className="text-center mt-2">
-                    <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">Mike Thompson</h3>
+                    <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">{user.name}</h3>
                     <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
-                        <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>abcd@gmail.com
+                        <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>{user.email}
+                    </div>
+                    <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>Password: {user.password}
                     </div>
                 </div>
                 <div className="mt-6 py-6 border-t border-slate-200 text-center">

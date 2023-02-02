@@ -7,7 +7,6 @@ const Login = () => {
     const state = useSelector(s => s);
 
     const dispatch = useDispatch();
-    console.log(state)
 
     //Login FN
     const handleLogIn = (e) => {
@@ -33,6 +32,7 @@ const Login = () => {
                 localStorage.setItem("token", restToken);
                 dispatch({type: "token", payload: restToken});
                 dispatch({ type: "isLoggedUser", payload: true });
+                dispatch({type: "userLogin", payload: [email, password]})
                 toast.success("Login Successfull");
             }
             if(data?.message?.length > 5){

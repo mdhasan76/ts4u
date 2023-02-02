@@ -1,4 +1,5 @@
 const initState = {
+    user:{email: "", password:"", name:""},
     isLoggedUser: false,
     userToken:"",
     allProduct: [],
@@ -21,6 +22,10 @@ export const  registerReducer = (state = initState, action) =>{
         case "isLoggedUser":
             return {
                 ...state, isLoggedUser: action.payload
+            }
+        case "userLogin":
+            return {
+                ...state, user: {email: action.payload[0], password: action.payload[1]}
             }
         default:
             return state
