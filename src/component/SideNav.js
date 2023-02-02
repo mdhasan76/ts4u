@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import {LoginOutlined} from '@ant-design/icons'
 
 const SideNav = () => {
     return (
@@ -58,7 +59,8 @@ const SideNav = () => {
                         href="/login"
                         class="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800"
                     >
-                        <svg
+                        <LoginOutlined />
+                        {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -76,7 +78,7 @@ const SideNav = () => {
                                 stroke-linejoin="round"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                             />
-                        </svg>
+                        </svg> */}
 
                         <small class="text-center text-xs font-medium"> Login </small>
                     </Link>

@@ -1,42 +1,74 @@
 import SideNav from '@/component/SideNav';
-import React from 'react';
+import VerifyModal from '@/component/VerifyModal';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const profile = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const {isVerified} = useSelector(s => s);
+
+    //send otp for verify
+    const sendOTP = () => {
+        fetch('https://staging-be-ecom.techserve4u.com/api/user/resendotp', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: "mdhasan8064@gmail.com" })
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.isOtpSend) {
+                    
+                    toast.success("OTP Sent On your Email, please check your email to get this otp");
+                    setIsModalOpen(!isModalOpen)
+                }
+            })
+    }
+
     return (
-            <div class="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-20">
-                <div class="px-6">
-                    <div class="flex flex-wrap justify-center">
-                        <div class="w-full flex justify-center">
-                            <div class="relative">
-                                <img src="https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/blob/main/build/assets/img/team-2.jpg?raw=true" class="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]" />
-                            </div>
-                        </div>
-                        <div class="w-full text-center mt-20">
-                            <div class="flex justify-center lg:pt-4 pt-8 pb-0">
-                                <div class="p-3 text-center">
-                                    <span class="text-xl font-bold block uppercase tracking-wide text-slate-700">Status</span>
-                                    <span class="text-sm text-slate-400">Verified</span>
-                                </div>
-                            </div>
+        <div className="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-20">
+            <div className="px-6">
+                <div className="flex flex-wrap justify-center">
+                    <div className="w-full flex justify-center">
+                        <div className="relative">
+                            <img src="https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/blob/main/build/assets/img/team-2.jpg?raw=true" className="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]" />
                         </div>
                     </div>
-                    <div class="text-center mt-2">
-                        <h3 class="text-2xl text-slate-700 font-bold leading-normal mb-1">Mike Thompson</h3>
-                        <div class="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
-                            <i class="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>Paris, France
-                        </div>
-                    </div>
-                    <div class="mt-6 py-6 border-t border-slate-200 text-center">
-                        <div class="flex flex-wrap justify-center">
-                            <div class="w-full px-4">
-                                <p class="font-light leading-relaxed text-slate-600 mb-4">An artist of considerable range, Mike is the name taken by Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and records all of his own music, giving it a warm.</p>
-                                <a href="javascript:;" class="font-normal text-slate-700 hover:text-slate-400">Follow Account</a>
+                    <div className="w-full text-center mt-20">
+                        <div className="flex justify-center lg:pt-4 pt-8 pb-0">
+                            <div className="p-3 text-center">
+                                <span className="text-xl font-bold block uppercase tracking-wide text-slate-700">Status</span>
+                                {
+                                    isVerified ? <span className="text-sm text-green-400">Verified</span> :
+                                    <span className="text-sm text-red-400">Not Verified</span>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-                <SideNav/>
+                <div className="text-center mt-2">
+                    <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">Mike Thompson</h3>
+                    <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>abcd@gmail.com
+                    </div>
+                </div>
+                <div className="mt-6 py-6 border-t border-slate-200 text-center">
+                    <div className="flex flex-wrap justify-center">
+                        <div className="w-full px-4">
+                            <p className="font-light leading-relaxed text-slate-600 mb-4">An artist of considerable range, Mike is the name taken by Melbourne-raised, Brooklyn-based Nick Murphy writes, performs and records all of his own music, giving it a warm.</p>
+                            {
+                                isVerified === true ? <a href="javascript:;" className="font-normal text-slate-700 hover:text-slate-400">Follow Account</a> :
+                                    <button onClick={sendOTP} className='border-2 mr-2 bg-cyan-700 text-white font-semibold text-lg rounded-lg border-white px-3 py-2'>Verify Now</button>
+                            }
+                        </div>
+                        <VerifyModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+                    </div>
+                </div>
             </div>
+            <SideNav />
+        </div>
     );
 };
 
