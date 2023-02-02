@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-const login = () => {
+const Login = () => {
     const [error, setError] = useState("")
     const state = useSelector(s => s);
 
@@ -31,6 +31,7 @@ const login = () => {
                 const restToken = data.token.split(" ")[1]
                 localStorage.setItem("token", restToken);
                 dispatch({type: "token", payload: restToken});
+                dispatch({ type: "isLoggedUser", payload: true });
                 toast.success("Login Successfull");
             }
             if(data?.message?.length > 5){
@@ -82,4 +83,4 @@ const login = () => {
     );
 };
 
-export default login;
+export default Login;

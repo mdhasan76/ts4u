@@ -1,3 +1,4 @@
+import PrivateRoute from '@/component/routes/PrivateRoutes';
 import SideNav from '@/component/SideNav';
 import VerifyModal from '@/component/VerifyModal';
 import React, { useState } from 'react';
@@ -28,7 +29,8 @@ const profile = () => {
     }
 
     return (
-        <div className="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-20">
+        <PrivateRoute>
+            <div className="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-20">
             <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                     <div className="w-full flex justify-center">
@@ -69,6 +71,7 @@ const profile = () => {
             </div>
             <SideNav />
         </div>
+        </PrivateRoute>
     );
 };
 

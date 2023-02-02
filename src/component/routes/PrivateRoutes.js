@@ -1,13 +1,11 @@
-import { useRouter } from "next/router";
+import Login from "@/pages/login";
 import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ children }) => {
-  const state = useSelector(s => s);
-  const router = useRouter();
-  const isAuthenticated = false;
-  if (!isAuthenticated) {
-    router.push('/login')
-    return null
+  const {isLoggedUser} = useSelector(s => s);
+
+  if (!isLoggedUser) {
+    return <Login/>
   }
 
   return <>{children}</>

@@ -1,8 +1,8 @@
 const initState = {
-    name: "Hasan",
+    isLoggedUser: false,
     userToken:"",
     allProduct: [],
-    isVerified: false
+    isVerified: false,
 }
 export const  registerReducer = (state = initState, action) =>{
     switch(action.type){
@@ -17,6 +17,10 @@ export const  registerReducer = (state = initState, action) =>{
         case "userVerifyed":
             return {
                 ...state, isVerified: action.payload
+            }
+        case "isLoggedUser":
+            return {
+                ...state, isLoggedUser: action.payload
             }
         default:
             return state
