@@ -10,8 +10,8 @@ const DtailsModal= ({isModalOpen, setIsModalOpen}) => {
 
   return (
     <>
-      <Modal title="Product Modal" open={isModalOpen} onOk={handleOk} onCancel={() => setIsModalOpen(false)}>
-        <p className='text-2xl font-medium p-5'>Product Details here</p>
+      <Modal title="Product Details Modal" open={isModalOpen} onOk={handleOk} onCancel={() => setIsModalOpen(false)}>
+        <p className='text-2xl font-medium p-5'>Product Details here....</p>
       </Modal>
     </>
   );

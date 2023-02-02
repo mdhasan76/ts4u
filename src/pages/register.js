@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { toast } from "react-hot-toast";
 
 const register = () => {
     const handleRegister = (e) =>{
@@ -20,7 +21,7 @@ const register = () => {
         .then(res => res.json())
         .then(data => {
             if(data.isOtpSend){
-                console.log("Registe success")
+                toast.success("Registe success")
             }
             console.log(data)
         })

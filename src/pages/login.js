@@ -17,7 +17,8 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         const user = {email, password}
-        // Login user From Backend
+
+        // Login user From Backend and Dispate redux action after successful get token
         fetch('https://staging-be-ecom.techserve4u.com/api/user/signin',{
             method: "POST",
             headers:{
