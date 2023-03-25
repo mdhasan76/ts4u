@@ -16,12 +16,15 @@ const Product = () => {
     }, [])
 
     return (
-        <div className='p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16'>
+        <div>
+            <h2 className='py-10 bg-gray-200 text-4xl font-bold text-center'>Next.js, Ant Design and Redux simple Practice project</h2>
+            <div className='p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16'>
         {
             allProduct?.map(d => <Card key={d._id} d={d} setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} />)
         }
         <DtailsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
     </div>
+        </div>
     );
 };
 
